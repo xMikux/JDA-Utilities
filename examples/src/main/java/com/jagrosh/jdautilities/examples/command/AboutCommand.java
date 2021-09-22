@@ -54,7 +54,7 @@ public class AboutCommand extends Command {
         this.description = description;
         this.features = features;
         this.name = "about";
-        this.help = "shows info about the bot";
+        this.help = "顯示有關機器人的資訊";
         this.guildOnly = false;
         this.perms = perms;
         this.botPermissions = new Permission[]{Permission.MESSAGE_EMBED_LINKS};
@@ -91,30 +91,30 @@ public class AboutCommand extends Command {
                 + (inv ? (join ? ", or " : "") + "[`invite`](" + oauthLink + ") me to your server" : "") + "!";
         String author = event.getJDA().getUserById(event.getClient().getOwnerId())==null ? "<@" + event.getClient().getOwnerId()+">" 
                 : event.getJDA().getUserById(event.getClient().getOwnerId()).getName();
-        StringBuilder descr = new StringBuilder().append("Hello! I am **").append(event.getSelfUser().getName()).append("**, ")
-                .append(description).append("\nI ").append(IS_AUTHOR ? "was written in Java" : "am owned").append(" by **")
-                .append(author).append("** using " + JDAUtilitiesInfo.AUTHOR + "'s [Commands Extension](" + JDAUtilitiesInfo.GITHUB + ") (")
-                .append(JDAUtilitiesInfo.VERSION).append(") and the [JDA library](https://github.com/DV8FromTheWorld/JDA) (")
-                .append(JDAInfo.VERSION).append(")\nType `").append(event.getClient().getTextualPrefix()).append(event.getClient().getHelpWord())
-                .append("` to see my commands!").append(join || inv ? invline : "").append("\n\nSome of my features include: ```css");
+        StringBuilder descr = new StringBuilder().append("你好! 我是 **").append(event.getSelfUser().getName()).append("**, ")
+                .append(description).append("\n我的 ").append(IS_AUTHOR ? "was written in Java" : "所有者").append("是 **")
+                .append(author).append("** ,此機器人製作使用 " + JDAUtilitiesInfo.AUTHOR + " [指令擴展](" + JDAUtilitiesInfo.GITHUB + ") (")
+                .append(JDAUtilitiesInfo.VERSION).append(") 和 [JDA依賴庫](https://github.com/DV8FromTheWorld/JDA) (")
+                .append(JDAInfo.VERSION).append(")\n輸入 `").append(event.getClient().getTextualPrefix()).append(event.getClient().getHelpWord())
+                .append("` 來查看我的指令!").append(join || inv ? invline : "").append("\n\n我的一些功能包括: ```css");
         for (String feature : features)
             descr.append("\n").append(event.getClient().getSuccess().startsWith("<") ? REPLACEMENT_ICON : event.getClient().getSuccess()).append(" ").append(feature);
         descr.append(" ```");
         builder.setDescription(descr);
         if (event.getJDA().getShardInfo() == null)
         {
-            builder.addField("Stats", event.getJDA().getGuilds().size() + " servers\n1 shard", true);
-            builder.addField("Users", event.getJDA().getUsers().size() + " unique\n" + event.getJDA().getGuilds().stream().mapToInt(g -> g.getMembers().size()).sum() + " total", true);
-            builder.addField("Channels", event.getJDA().getTextChannels().size() + " Text\n" + event.getJDA().getVoiceChannels().size() + " Voice", true);
+            builder.addField("統計", event.getJDA().getGuilds().size() + " 伺服器\n1 shard", true);
+            builder.addField("使用者", event.getJDA().getUsers().size() + " 獨特\n" + event.getJDA().getGuilds().stream().mapToInt(g -> g.getMembers().size()).sum() + " 總數", true);
+            builder.addField("頻道", event.getJDA().getTextChannels().size() + " 文字\n" + event.getJDA().getVoiceChannels().size() + " 語音", true);
         }
         else
         {
-            builder.addField("Stats", (event.getClient()).getTotalGuilds() + " Servers\nShard " + (event.getJDA().getShardInfo().getShardId() + 1) 
+            builder.addField("統計", (event.getClient()).getTotalGuilds() + " 伺服器\nShard " + (event.getJDA().getShardInfo().getShardId() + 1) 
                     + "/" + event.getJDA().getShardInfo().getShardTotal(), true);
-            builder.addField("This shard", event.getJDA().getUsers().size() + " Users\n" + event.getJDA().getGuilds().size() + " Servers", true);
-            builder.addField("", event.getJDA().getTextChannels().size() + " Text Channels\n" + event.getJDA().getVoiceChannels().size() + " Voice Channels", true);
+            builder.addField("這個shard", event.getJDA().getUsers().size() + " 使用者\n" + event.getJDA().getGuilds().size() + " 伺服器", true);
+            builder.addField("", event.getJDA().getTextChannels().size() + " 文字頻道\n" + event.getJDA().getVoiceChannels().size() + " 語音頻道", true);
         }
-        builder.setFooter("Last restart", null);
+        builder.setFooter("最後從開", null);
         builder.setTimestamp(event.getClient().getStartTime());
         event.reply(builder.build());
     }
