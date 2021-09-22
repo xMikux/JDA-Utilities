@@ -111,10 +111,10 @@ public class AboutCommand extends Command {
         {
             builder.addField("統計", (event.getClient()).getTotalGuilds() + " 伺服器\nShard " + (event.getJDA().getShardInfo().getShardId() + 1) 
                     + "/" + event.getJDA().getShardInfo().getShardTotal(), true);
-            builder.addField("這個shard", event.getJDA().getUsers().size() + " 使用者\n" + event.getJDA().getGuilds().size() + " 伺服器", true);
+            builder.addField("這個 shard", event.getJDA().getUsers().size() + " 使用者\n" + event.getJDA().getGuilds().size() + " 伺服器", true);
             builder.addField("", event.getJDA().getTextChannels().size() + " 文字頻道\n" + event.getJDA().getVoiceChannels().size() + " 語音頻道", true);
         }
-        builder.setFooter("最後從開", null);
+        builder.setFooter("最後重開", null);
         builder.setTimestamp(event.getClient().getStartTime());
         event.reply(builder.build());
     }
